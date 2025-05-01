@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8" />
+  <title>Պատվերներ Կիրճի</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #fefefe;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+    }
+    #kitchen-order-list {
+      margin-top: 30px;
+    }
+    button {
+      padding: 6px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: none;
+      background: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Պատվերներ Կիրճի</h1>
+
+<div id="kitchen-order-list"></div>
+
+<script>
+  const kitchenOrders = [];
+
+  function updateKitchenOrders() {
+    const kitchenOrderList = document.getElementById('kitchen-order-list');
+    kitchenOrderList.innerHTML = '';
+    kitchenOrders.forEach((order, index) => {
+      kitchenOrderList.innerHTML += `
+        <div>
+          <h4>Սեղան ${order.tableIndex + 1}</h4>
+          <p>${order.orderDetails}</p>
+          <button onclick="markOrderAsDone(${index})">🟢 Պատվեր պատրաստ է</button>
+        </div>
+      `;
+    });
+  }
+
+  function markOrderAsDone(orderIndex) {
+    const order = kitchenOrders[orderIndex];
+    kitchenOrders.splice(orderIndex, 1);  // Remove the order after it's done
+    updateKitchenOrders();
+  }
+</script>
+
+</body>
+</html>
